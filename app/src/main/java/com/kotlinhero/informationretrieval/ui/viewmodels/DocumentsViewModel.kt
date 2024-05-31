@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kotlinhero.informationretrieval.data.api.DocumentsApi
 import com.kotlinhero.informationretrieval.data.enums.DatasetType
-import com.kotlinhero.informationretrieval.data.exceptions.ServerException
 import com.kotlinhero.informationretrieval.ui.state.DocumentsScreenUiState
 import io.ktor.utils.io.printStack
 import kotlinx.coroutines.FlowPreview
@@ -32,7 +31,7 @@ class DocumentsViewModel(private val documentsApi: DocumentsApi) : ViewModel() {
                     try {
                         val suggestions = documentsApi.getSuggestions(query, _stateFlow.first().datasetType.key)
                         _stateFlow.update {
-                            it.copy(suggestions = suggestions)
+                            it.copy(suggestions = suggestions.take(10))
                         }
                     } catch (ex: Exception) {
                         // TODO:

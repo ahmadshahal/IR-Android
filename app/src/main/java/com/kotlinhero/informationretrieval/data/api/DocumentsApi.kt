@@ -8,7 +8,7 @@ import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 
-private const val BASE_URL = "http://192.168.1.102:8000"
+private const val BASE_URL = "http://192.168.1.102:8002"
 
 class DocumentsApi(private val httpClient: HttpClient) {
     suspend fun getDocuments(query: String, dataset: String): List<Document> {
